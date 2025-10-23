@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://prisly.d/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. DUAL URL SETUP FOR SUPABASE
+datasource db {
+  provider = "postgresql"
+  // Used by the application (runtime) - connects to port 6543 (pooler)
+  url       = env("DATABASE_URL")
+  // Used by the Prisma CLI (db pull, migrate) - connects to port 5432 (direct)
+  directUrl = env("DIRECT_URL")
+}
+
+// 2. MODEL DEFINITION
+model Order {
+  id            String   @id @default(uuid())
+  customer_name String
+  item          String
+  quantity      Int
+  // Using the defined Status enum
+  status        Status   @default(pending)
+  created_at    DateTime @default(now())
+}
+
+// 3. ENUM DEFINITION (Case sensitive in PostgreSQL)
+enum Status {
+  pending
+  completed
+  cancelled
+}
