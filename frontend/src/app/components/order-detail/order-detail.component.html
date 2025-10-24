@@ -1,0 +1,100 @@
+<div class="order-detail-container">
+  <!-- Botón de regreso -->
+  <button mat-button color="primary" (click)="onBack()" class="back-button">
+    <mat-icon>arrow_back</mat-icon>
+    Volver al listado
+  </button>
+
+  <!-- Tarjeta de carga -->
+  <mat-card class="loading-card" *ngIf="loading">
+    <div class="loading-content">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando detalles de la orden...</p>
+    </div>
+  </mat-card>
+
+  <!-- Mensaje de error -->
+  <mat-card class="error-card" *ngIf="error && !loading">
+    <div class="error-content">
+      <mat-icon color="warn">error_outline</mat-icon>
+      <p>{{ error }}</p>
+      <button mat-button (click)="loadOrder()">
+        <mat-icon>refresh</mat-icon>
+        Reintentar
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Tarjeta de detalles de la orden -->
+  <mat-card class="order-card" *ngIf="order && !loading">
+    <!-- Encabezado con título y acciones -->
+    <mat-card-header class="order-header">
+      <div class="header-content">
+        <mat-card-title>
+          <mat-icon class="header-icon">receipt_long</mat-icon>
+          Detalles de la Orden #{{ order.id }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Creada el {{ order.created_at | date:'medium' }}
+        </mat-card-subtitle>
+      </div>
+      <div class="header-actions">
+        <button mat-stroked-button color="primary" (click)="onEdit()" class="action-button">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-stroked-button color="warn" (click)="onDelete()" class="action-button">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <!-- Contenido principal -->
+    <mat-card-content class="order-content">
+      <div class="order-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">person</mat-icon>
+          Cliente
+        </h3>
+        <p class="customer-name">{{ order.customer_name }}</p>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="order-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">shopping_cart</mat-icon>
+          Artículo
+        </h3>
+        <div class="item-details">
+          <div class="item-name">{{ order.item }}</div>
+          <div class="item-quantity">
+            <span class="label">Cantidad:</span>
+            <span class="value">{{ order.quantity }}</span>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="order-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">info</mat-icon>
+          Estado y Detalles
+        </h3>
+        <div class="status-details">
+          <div class="status-badge" [ngClass]="'status-' + order.status.toLowerCase()">
+            {{ getStatusLabel(order.status) }}
+          </div>
+          <div class="last-updated">
+            <span class="label">Última actualización:</span>
+            <span class="value">{{ order.created_at | date:'medium' }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
