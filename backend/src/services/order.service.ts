@@ -1,5 +1,5 @@
 import { prisma } from "../db/database.js";
-import { OrderStatus } from "../types/shared.js";
+import type { OrderStatus } from "../types/shared.js";
 
 export const createOrder = async (data: {
   customer_name: string;
