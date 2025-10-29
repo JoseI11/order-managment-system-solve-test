@@ -2,8 +2,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "nodenext",                // ✅ Cambiá esto
-    "moduleResolution": "NodeNext",    // ✅ y esto
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "ES2022",
     "lib": ["ES2022"],
     "esModuleInterop": true,
@@ -13,6 +13,22 @@
     "declaration": true,
     "declarationMap": true,
     "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node","jest"],
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    
 
-  }
+
+    "verbatimModuleSyntax": true,
+
+
+    "resolveJsonModule": true,
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
