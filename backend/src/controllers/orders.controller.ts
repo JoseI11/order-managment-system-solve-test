@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import * as svc from "../services/order.service.js";
 
 export const createOrder = async (req: Request, res: Response) => {
