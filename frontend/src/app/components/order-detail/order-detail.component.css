@@ -1,0 +1,286 @@
+/* Contenedor principal */
+.order-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Botón de regreso */
+.back-button {
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Tarjeta de carga */
+.loading-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #666;
+}
+
+/* Tarjeta de error */
+.error-card {
+  padding: 24px;
+  margin-bottom: 24px;
+  background-color: #fff8f8;
+  border-left: 4px solid #f44336;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  color: #d32f2f;
+}
+
+.error-content mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+/* Tarjeta de orden */
+.order-card {
+  width: 100%;
+  margin-bottom: 24px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado de la tarjeta */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 24px 16px;
+  background-color: #fafafa;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.order-header mat-card-title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.header-icon {
+  margin-right: 12px;
+  color: #3f51b5;
+}
+
+.order-header mat-card-subtitle {
+  color: #666;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Contenido de la orden */
+.order-content {
+  padding: 24px;
+}
+
+.order-section {
+  margin-bottom: 24px;
+}
+
+.order-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  color: #444;
+}
+
+.section-icon {
+  margin-right: 12px;
+  color: #3f51b5;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+/* Detalles del cliente */
+.customer-name {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding-left: 34px; /* Alineación con el ícono */
+}
+
+/* Detalles del artículo */
+.item-details {
+  padding-left: 34px; /* Alineación con el ícono */
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.item-quantity .label {
+  font-weight: 500;
+}
+
+/* Estado y detalles */
+.status-details {
+  padding-left: 34px; /* Alineación con el ícono */
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+/* Colores para los diferentes estados */
+.status-pending {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.status-completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-cancelled {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-shipped {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.last-updated {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+
+.last-updated .label {
+  font-weight: 500;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .order-content {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .customer-name,
+  .item-details,
+  .status-details {
+    padding-left: 0;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.order-card {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Estilos para los botones de acción en hover */
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los mat-divider */
+mat-divider {
+  margin: 16px 0;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Estilos para el botón de recargar en caso de error */
+.error-content button {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

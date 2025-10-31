@@ -1,0 +1,121 @@
+<div class="form-container">
+  <!-- Tarjeta del formulario -->
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="form-icon">{{ isEditMode ? 'edit_note' : 'add_circle_outline' }}</mat-icon>
+        {{ isEditMode ? 'Editar Orden' : 'Nueva Orden' }}
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="isEditMode">
+        ID: {{ orderId }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Formulario -->
+    <mat-card-content>
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
+        <!-- Mensaje de error general -->
+        <div *ngIf="error" class="error-message">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ error }}</span>
+        </div>
+
+        <!-- Campos del formulario -->
+        <div class="form-row">
+          <!-- Nombre del cliente -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nombre del Cliente</mat-label>
+            <input 
+              matInput 
+              type="text" 
+              formControlName="customer_name"
+              placeholder="Ej: Juan Pérez"
+              required
+            >
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error *ngIf="submitted && f['customer_name'].errors">
+              <span *ngIf="f['customer_name'].errors?.['required']">El nombre es obligatorio</span>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Artículo -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Artículo</mat-label>
+            <input 
+              matInput 
+              type="text" 
+              formControlName="item"
+              placeholder="Ej: Laptop HP"
+              required
+            >
+            <mat-icon matSuffix>inventory_2</mat-icon>
+            <mat-error *ngIf="submitted && f['item'].errors">
+              <span *ngIf="f['item'].errors?.['required']">El artículo es obligatorio</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <!-- Cantidad -->
+          <mat-form-field appearance="outline" class="form-field quantity-field">
+            <mat-label>Cantidad</mat-label>
+            <input 
+              matInput 
+              type="number" 
+              formControlName="quantity"
+              min="1"
+              required
+            >
+            <mat-icon matSuffix>numbers</mat-icon>
+            <mat-error *ngIf="submitted && f['quantity'].errors">
+              <span *ngIf="f['quantity'].errors?.['required']">La cantidad es obligatoria</span>
+              <span *ngIf="f['quantity'].errors?.['min']">La cantidad mínima es 1</span>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Estado -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="status" required>
+              <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+                <span class="status-badge status-{{ status.value }}">
+                  {{ status.viewValue }}
+                </span>
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['status'].errors">
+              <span *ngIf="f['status'].errors?.['required']">Seleccione un estado</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Acciones del formulario -->
+        <div class="form-actions">
+          <button 
+            mat-stroked-button 
+            type="button" 
+            color="warn" 
+            (click)="onCancel()"
+            [disabled]="loading"
+            class="action-button"
+          >
+            <mat-icon>close</mat-icon>
+            Cancelar
+          </button>
+          
+          <button 
+            mat-raised-button 
+            type="submit" 
+            color="primary"
+            [disabled]="loading"
+            class="action-button"
+          >
+            <mat-icon *ngIf="!loading">{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+            <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+            {{ isEditMode ? 'Actualizar' : 'Crear' }} Orden
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

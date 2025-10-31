@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: oms-full-back
+    env_file:
+      - ./backend/.env     # contiene DATABASE_URL, DIRECT_URL, PORT=3000
+    expose:
+      - "3000"             # expone solo internamente a la red de compose
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/orders').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: oms-full-web
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8080:80"          # 👈 solo un puerto público
+    restart: unless-stopped
