@@ -23,7 +23,7 @@ export interface PaginatedOrders {
   providedIn: 'root',
 })
 export class OrdersService {
-  private apiUrl = 'http://localhost:3000/orders';
+  private apiUrl = '/api/orders';
 
   constructor(private http: HttpClient) {}
 
