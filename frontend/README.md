@@ -1,52 +1,119 @@
-# Frontend
+# Order Management System - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+This project is the frontend for the Order Management System, built with [Angular](https://angular.io/) and [Angular Material](https://material.angular.io/). It provides a responsive user interface for managing orders.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- Modern, responsive UI built with Angular Material
+- Order management (Create, Read, Update, Delete)
+- Real-time updates
+- Form validation
+- Responsive design
+- Docker support for containerized deployment
+- Nginx web server configuration
 
+## 📦 Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- Angular CLI (v19+)
+- Docker and Docker Compose (for containerized development)
+
+## 🛠️ Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment (if needed):
+   - Copy `src/environments/environment.example.ts` to `src/environments/environment.ts`
+   - Update API endpoints and other settings as needed
+
+## 🏃‍♂️ Development
+
+### Start Development Server
 ```bash
 ng serve
 ```
+The application will be available at `http://localhost:4200/`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Development with Docker
 ```bash
-ng generate component component-name
+docker-compose up --build
+```
+The application will be available at `http://localhost:8080/`
+
+## 🏗 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── app/              # Application components, services, and modules
+│   │   ├── components/   # Reusable UI components
+│   │   ├── services/     # API services
+│   │   ├── models/       # TypeScript interfaces/types
+│   │   ├── shared/       # Shared modules and components
+│   │   └── app.module.ts # Root module
+│   ├── assets/           # Static assets (images, fonts, etc.)
+│   ├── environments/     # Environment configurations
+│   └── styles/           # Global styles
+├── nginx/               # Nginx configuration for production
+├── .dockerignore
+├── Dockerfile           # Production Dockerfile
+└── nginx.conf          # Nginx configuration
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🧪 Testing
 
+### Unit Tests
+Run unit tests with Karma:
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
-
-To build the project run:
-
+### End-to-End Tests
+Run e2e tests with Protractor:
 ```bash
-ng build
+ng e2e
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🚀 Production Build
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Build for Production
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+The build artifacts will be stored in the `dist/` directory.
 
-For end-to-end (e2e) testing, run:
+### Production with Docker
+```bash
+docker build -t order-management-frontend .
+docker run -p 8080:80 order-management-frontend
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+- `API_URL`: Base URL for the backend API (default: `/api`)
+
+### Nginx Configuration
+- The application is served using Nginx in production
+- Configuration can be found in `nginx.conf`
+- API requests are proxied to the backend service
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ```bash
 ng e2e

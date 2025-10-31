@@ -1,52 +1,91 @@
 # 🚀 Order Management System
 
-Sistema de gestión de pedidos con backend en Node.js/TypeScript, Prisma y PostgreSQL.
+A full-stack order management system with a modern Angular frontend and Node.js/TypeScript backend, built with scalability and maintainability in mind.
 
-## 📋 Tabla de Contenidos
-- [Características](#-características)
-- [Tecnologías](#-tecnologías)
-- [Requisitos](#-requisitos-previos)
-- [Instalación](#-instalación)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Documentación de la API](#-documentación-de-la-api)
-- [Uso con Postman](#-uso-con-postman)
-- [Documentación con Swagger](#-documentación-con-swagger)
-- [Próximos Pasos](#-próximos-pasos)
+## 🌟 Features
 
-## ✨ Características
+### Backend
+- **RESTful API** with Express and TypeScript
+- **PostgreSQL** database with **Prisma ORM**
+- Data validation and error handling
+- Pagination and filtering
+- **Swagger** API documentation
+- **Docker** containerization
+- Environment-based configuration
 
-- **Backend**:
-  - API RESTful con Express y TypeScript
-  - Base de datos PostgreSQL con Prisma ORM
-  - Validación de datos
-  - Manejo de errores centralizado
-  - Paginación y filtrado de resultados
-  - Documentación con Swagger
+### Frontend
+- **Angular 19** with **TypeScript**
+- **Angular Material** for modern UI components
+- **Responsive design** for all devices
+- **Reactive forms** with validation
+- **Docker** support for easy deployment
+- **Nginx** web server in production
 
-## 🛠️ Tecnologías
+## 🛠️ Tech Stack
 
-- **Backend**:
-  - Node.js
-  - TypeScript
-  - Express
-  - Prisma
-  - PostgreSQL
-  - Swagger UI
+### Backend
+- **Runtime**: Node.js 18+
+- **Language**: TypeScript
+- **Framework**: Express
+- **ORM**: Prisma
+- **Database**: PostgreSQL
+- **API Docs**: Swagger UI
+- **Containerization**: Docker
 
-## 📦 Requisitos Previos
+### Frontend
+- **Framework**: Angular 19
+- **UI Library**: Angular Material
+- **State Management**: RxJS
+- **Build Tool**: Angular CLI
+- **Web Server**: Nginx (production)
+- **Containerization**: Docker
 
-- Node.js 16+
-- npm o yarn
+## 📦 Prerequisites
+
+### Development
+- Node.js 18+
+- npm or yarn
+- Angular CLI 19+
 - PostgreSQL 12+
 - Git
+- Docker & Docker Compose (optional)
 
-## 🚀 Instalación
+## 🚀 Quick Start
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/order-managment-system.git
-   cd order-managment-system/backend
-   ```
+### With Docker (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/your-username/order-managment-system.git
+cd order-managment-system
+
+# Start all services
+docker-compose up --build
+```
+
+### Manual Setup
+
+#### Backend
+```bash
+cd backend
+npm install
+cp .env.example .env  # Update with your database credentials
+npx prisma migrate dev
+npm run dev
+```
+
+#### Frontend
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+## 🌐 Access the Application
+
+- **Frontend**: http://localhost:4200 (dev) or http://localhost:8080 (Docker)
+- **Backend API**: http://localhost:3000
+- **API Documentation**: http://localhost:3000/api-docs
+- **Database**: PostgreSQL at localhost:5432
 
 2. Instalar dependencias:
    ```bash
@@ -83,82 +122,124 @@ backend/
 │   └── schema.prisma    # Esquema de la base de datos
 ├── src/
 │   ├── controllers/     # Controladores
-│   ├── routes/          # Rutas de la API
-│   ├── services/        # Lógica de negocio
-│   ├── db/              # Configuración de la base de datos
-│   ├── types/           # Tipos TypeScript
-│   ├── app.ts           # Configuración de Express
-│   ├── index.ts         # Punto de entrada
-│   └── prismaClient.ts  # Cliente de Prisma
-└── .env                 # Variables de entorno
 ```
-scm-history-item:c%3A%5CUsers%5CJose%5CDocuments%5Corder-managment-system-solve-test?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%220f336d52963ddc9a96448ce36407c1dc4d92b0c5%22%2C%22historyItemParentId%22%3A%22928b28e4468bfe53af2170a26b26748c2d9c8940%22%2C%22historyItemDisplayId%22%3A%220f336d5%22%7D
-## 📚 Documentación de la API
 
-### Órdenes
+## 📚 API Documentation
 
-#### Crear una orden
+### Orders
+
+#### Create an Order
 ```
-POST /orders
+POST /api/orders
 ```
-**Body**:
+**Request Body**:
 ```json
 {
-  "customer_name": "Juan Pérez",
-  "item": "Laptop HP",
+  "customer_name": "John Doe",
+  "item": "Laptop",
   "quantity": 1,
   "status": "pending"
 }
 ```
 
-#### Listar órdenes (con paginación)
+#### List Orders
 ```
-GET /orders?page=1&page_size=10&status=pending
-```
-
-#### Obtener una orden
-```
-GET /orders/:id
+GET /api/orders?page=1&page_size=10&status=pending
 ```
 
-#### Actualizar una orden
+#### Get Order by ID
 ```
-PUT /orders/:id
-```
-**Body**:
-```json
-{
-  "status": "completed"
-}
+GET /api/orders/:id
 ```
 
-#### Eliminar una orden
+#### Update Order
 ```
-DELETE /orders/:id
-```
-
-## 🖥️ Uso con Postman
-
-1. Importa la colección de Postman desde:
-   `docs/postman/Order_Management_API.postman_collection.json`
-
-2. O configura manualmente los endpoints como se muestra en la documentación.
-
-## 📖 Documentación con Swagger
-
-La documentación interactiva de la API está disponible en:
-```
-http://localhost:3000/api-docs
+PUT /api/orders/:id
 ```
 
-## 🚧 Próximos Pasos
+#### Delete Order
+```
+DELETE /api/orders/:id
+```
 
-- [ ] Implementar autenticación JWT
-- [ ] Añadir tests unitarios y de integración
-- [ ] Desplegar en producción
-- [ ] Crear interfaz de usuario con React/Vue
+## 🛠️ Development
 
-## 📄 Licencia
+### Backend Development
+```bash
+cd backend
+npm run dev
+```
+
+### Frontend Development
+```bash
+cd frontend
+ng serve
+```
+
+### Running Tests
+```bash
+# Backend tests
+cd backend
+npm test
+
+# Frontend tests
+cd frontend
+ng test
+```
+
+## 🚀 Deployment
+
+### Production Build
+```bash
+# Backend
+cd backend
+npm run build
+npm start
+
+# Frontend
+cd frontend
+npm run build
+```
+
+### Docker Deployment
+```bash
+docker-compose up --build -d
+```
+
+## 📖 API Documentation
+
+Interactive API documentation is available at:
+```
+http://your-domain.com/api-docs
+```
+
+## 🚧 Next Steps
+
+- [ ] Implement JWT Authentication
+- [ ] Add unit and integration tests
+- [ ] Set up CI/CD pipeline
+- [ ] Add monitoring and logging
+- [ ] Implement user roles and permissions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Angular](https://angular.io/)
+- [Express](https://expressjs.com/)
+- [Prisma](https://www.prisma.io/)
+- [Docker](https://www.docker.com/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 MIT
 
